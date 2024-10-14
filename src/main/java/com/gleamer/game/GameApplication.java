@@ -1,11 +1,9 @@
 package com.gleamer.game;
 
 import com.gleamer.game.model.GameConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
 
-@SpringBootApplication
 public class GameApplication {
     private static final int NUMBER_OF_QUESTION_PER_CATEGORY = 50;
     private static final int MAX_PLAYERS = 6;
