@@ -1,6 +1,8 @@
 package com.gleamer.game;
 
 import com.gleamer.game.model.GameConfiguration;
+import com.gleamer.game.service.Game;
+import com.gleamer.game.service.impl.GameImpl;
 
 import java.util.Scanner;
 
@@ -18,7 +20,7 @@ public class GameApplication {
                 MIN_PLAYERS,
                 MAP_SIZE,
                 GOLD_FOR_WIN);
-        Game game = new Game(configuration);
+        Game game = new GameImpl(configuration);
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Game start");
