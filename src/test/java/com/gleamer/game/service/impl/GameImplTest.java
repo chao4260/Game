@@ -1,4 +1,4 @@
-package com.gleamer.game;
+package com.gleamer.game.service.impl;
 
 import com.gleamer.game.model.Category;
 import com.gleamer.game.model.GameConfiguration;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameTest {
+public class GameImplTest {
     private static final int NUMBER_OF_QUESTION_PER_CATEGORY = 2;
     private static final int MAX_PLAYERS = 3;
     private static final int MIN_PLAYERS = 2;
@@ -22,12 +22,11 @@ public class GameTest {
     private static final String PLAYER_1 = "P1";
     private static final String PENALTY_PLAYER_1 = "PP1";
 
-
-    private Game game;
+    private GameImpl game;
 
     @BeforeEach
     public void setup() {
-        game = new Game(new GameConfiguration(
+        game = new GameImpl(new GameConfiguration(
                 NUMBER_OF_QUESTION_PER_CATEGORY,
                 MAX_PLAYERS,
                 MIN_PLAYERS,
@@ -181,5 +180,4 @@ public class GameTest {
         game.addPlayer(PENALTY_PLAYER_1);
         game.processAnswerAndCheckWinner(false);
     }
-
 }

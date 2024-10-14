@@ -1,13 +1,14 @@
-package com.gleamer.game;
+package com.gleamer.game.service.impl;
 
 import com.gleamer.game.model.Category;
 import com.gleamer.game.model.GameConfiguration;
 import com.gleamer.game.model.Player;
 import com.gleamer.game.model.QuestionBank;
+import com.gleamer.game.service.Game;
 
 import java.util.ArrayList;
 
-public class Game {
+public class GameImpl implements Game {
     private final GameConfiguration configuration;
     private final ArrayList<Player> players;
     private final QuestionBank questionBank;
@@ -15,16 +16,18 @@ public class Game {
     private int currentPlayerIndex;
     private boolean questionWasAsked;
 
-    public Game(GameConfiguration configuration) {
+    public GameImpl(GameConfiguration configuration) {
         this.configuration = configuration;
         this.players = new ArrayList<>();
         this.questionBank = new QuestionBank(configuration.numberOfQuestionPerCategory());
     }
 
+    @Override
     public boolean isPlayable() {
         return players.size() >= configuration.minPlayers();
     }
 
+    @Override
     public boolean addPlayer(String playerName) {
         if (players.size() >= configuration.maxPlayers()) {
             System.out.println("The maximum number of players is reached!");
@@ -42,6 +45,7 @@ public class Game {
         return true;
     }
 
+    @Override
     public void roll(int roll) {
         Player currentPlayer = players.get(currentPlayerIndex);
         System.out.println(currentPlayer.getName() + " is the current player");
@@ -61,6 +65,7 @@ public class Game {
         }
     }
 
+    @Override
     public boolean processAnswerAndCheckWinner(boolean correctAnswer) {
         boolean win = false;
 
@@ -75,6 +80,10 @@ public class Game {
         return win;
     }
 
+    public boolean isQuestionWasAsked() {
+        return questionWasAsked;
+    }
+
     private boolean didPlayerWin() {
         Player currentPlayer = players.get(currentPlayerIndex);
         boolean win = currentPlayer.getPurse() == configuration.goldForWin();
@@ -83,11 +92,6 @@ public class Game {
         }
         return win;
     }
-
-    public boolean isQuestionWasAsked() {
-        return questionWasAsked;
-    }
-
     private void moveToNewPlace(Player player, int roll) {
         int newPlace = (player.getPlace() + roll) % configuration.mapSize();
         player.setPlace(newPlace);
